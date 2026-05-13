@@ -1,67 +1,124 @@
-# AI-Disclosure-Project
-AI disclosure and investor sentiment project
-## Data Sources and Sample Construction
+# AI-Related Innovation Disclosure and Investor Sentiment: Evidence from China’s Stock Market
 
-This study combines financial data from the CSMAR database with manually constructed AI disclosure measures extracted from corporate annual reports.
+## Author
+Sinuo Liu
 
-For the baseline analysis (Hypothesis 1), the sample includes all Chinese A-share listed firms, excluding financial firms and ST companies, following standard practice in the literature. The dependent variable (investor sentiment) and firm-level control variables are obtained from the CSMAR database.
+## Research Question
+AI-Related Innovation Disclosure and Investor Sentiment: Evidence from China’s Stock Market
 
-For the AI disclosure analysis (Hypotheses 2 and 3), the independent variables are constructed using a text analysis approach. Specifically, annual reports are collected and processed using Python, and AI-related sentences are identified and classified into two categories: AI innovation disclosure and AI risk disclosure, based on a dictionary-based method.
+## Dataset Description
 
-Due to the computational intensity of large-scale text processing, a subsample of firms is selected for the AI disclosure analysis. This subsample is not driven by data availability issues, but rather by practical constraints in processing and cleaning textual data. The dependent variable (investor sentiment) and control variables in this part are still obtained from the CSMAR database to ensure consistency across analyses.
+This project uses two related datasets to examine AI-related disclosure and investor sentiment in China’s stock market.
 
-## Methodology
+### Dataset 1: Baseline Dataset for Hypothesis 1
 
-This study employs a dictionary-based text analysis approach to construct AI disclosure variables.
+**What it contains:**  
+The baseline dataset is a firm-year dataset used for Hypothesis 1. It contains:
+- Stock code
+- Stock name
+- Year
+- AI disclosure / AI word frequency variables downloaded from CSMAR
+- Investor sentiment variable, proxied by turnover rate
+- Firm-level control variables, such as firm size, leverage, profitability, growth, cash ratio, TobinQ, listing age, board characteristics, ownership concentration, and SOE status
 
-First, annual reports are processed using Python to extract sentences containing AI-related keywords. These sentences are then classified into two categories based on predefined keyword dictionaries:
+**Where it comes from:**  
+This dataset is mainly obtained from the CSMAR database. The AI disclosure variable for Hypothesis 1 is downloaded from CSMAR’s AI-related word frequency dataset. The investor sentiment variable and firm-level control variables are also obtained from CSMAR.
 
-- AI innovation-related sentences
-- AI risk-related sentences
+**How it was collected:**  
+The CSMAR data were downloaded directly from the CSMAR database and then cleaned and merged in Python. The AI disclosure dataset and trading/turnover dataset were merged by stock code and year. Control variables were also merged at the firm-year level using stock code and year.
 
-At the firm-year level, AI disclosure variables are constructed by aggregating the classified sentences. Specifically, the main measures include:
+This baseline dataset covers Chinese A-share listed firms after excluding financial firms and ST companies.
 
-- The total number of AI innovation-related sentences
-- The total number of AI risk-related sentences
-- Alternatively, the proportion of each type relative to total AI-related sentences
+---
 
-These firm-year level measures are then merged with financial data from the CSMAR database and used in regression analysis.
+### Dataset 2: Manually Constructed AI Innovation and Risk Disclosure Dataset for Hypotheses 2 and 3
 
+**What it contains:**  
+The manually constructed dataset is used for Hypotheses 2 and 3. It contains sentence-level and firm-year level AI disclosure variables, including:
+- Stock code
+- Report year
+- Annual report file name
+- Total number of sentences in each annual report
+- AI-related sentences extracted from annual reports
+- Matched AI keywords
+- AI innovation disclosure classification
+- AI risk disclosure classification
+- Neutral and mixed AI sentence labels
+- Firm-year level AI disclosure measures, including:
+  - total AI-related sentences
+  - AI innovation-related sentences
+  - AI risk-related sentences
+  - AI disclosure ratio
+  - AI innovation disclosure ratio
+  - AI risk disclosure ratio
 
+**Where it comes from:**  
+The annual reports were collected from CNINFO:
+http://www.cninfo.com.cn
+
+The investor sentiment variable and control variables used together with this dataset are still obtained from CSMAR.
+
+**How it was collected:**  
+Because CSMAR does not provide direct measures of AI innovation disclosure and AI risk disclosure, this project manually constructs these variables from annual reports.
+
+The collection and processing steps are:
+1. Annual report PDFs were downloaded from CNINFO.
+2. Python was used to extract text from the PDF files.
+3. The text was split into sentences.
+4. AI-related sentences were identified using a Chinese AI keyword dictionary.
+5. AI-related sentences were classified into innovation-related, risk-related, neutral, or mixed categories using Chinese keyword dictionaries.
+6. Sentence-level results were aggregated to the firm-year level.
+7. The resulting AI innovation and AI risk disclosure variables were prepared for merging with CSMAR investor sentiment and control variables.
+
+This manually constructed dataset is based on a selected sample of approximately 100 firms over a five-year period. The smaller sample is used because sentence-level PDF processing and manual dictionary validation are more time-consuming than downloading structured financial data.
+
+## Method Summary
+
+This project uses a dictionary-based textual analysis method.
+
+For Hypothesis 1, the AI disclosure variable is obtained from CSMAR’s AI word frequency data and merged with investor sentiment and control variables from CSMAR.
+
+For Hypotheses 2 and 3, AI innovation disclosure and AI risk disclosure are manually constructed from annual report texts. The key idea is to first identify AI-related sentences and then classify them into innovation-related and risk-related categories.
 
 ## Key Variables
 
-- Dependent Variable (Y):
-  - Investor sentiment, proxied by the turnover rate from the CSMAR database. The turnover rate captures trading activity and is widely used in the literature as a proxy for investor sentiment.
+### Hypothesis 1
 
-- Independent Variables (X):
-  - AI Innovation Disclosure:
-    Measured as the number (or proportion) of AI-related sentences in annual reports that reflect innovation-related content. These sentences are identified using a predefined dictionary of innovation-related keywords (e.g., “人工智能应用”, “技术创新”, “智能化升级”).
+- Independent variable (X):
+  - AI disclosure / AI word frequency variable from CSMAR
 
-  - AI Risk Disclosure:
-    Measured as the number (or proportion) of AI-related sentences that reflect risk-related content. These sentences are identified using a predefined dictionary of risk-related keywords (e.g., “风险”, “不确定性”, “数据安全”, “监管”).
+- Dependent variable (Y):
+  - Investor sentiment, proxied by turnover rate from CSMAR
 
-- Control Variables:
-  - Firm size (Size)
-  - Leverage (Lev)
-  - Profitability (ROA)
-  - Growth (Growth)
-  - Cash holdings (CashRatio)
-  - Firm value (TobinQ)
-  - Listing age (ListAge)
-  - Governance variables (Board, Indep, Dual, Top1, SOE)
- 
-    
-## Data Quality and Limitations
+- Control variables:
+  - Size
+  - Lev
+  - ROA
+  - Growth
+  - CashRatio
+  - TobinQ
+  - ListAge
+  - Board
+  - Indep
+  - Dual
+  - Top1
+  - SOE
 
-The sentence-level classification results show an imbalanced distribution across categories. Most AI-related sentences are classified as innovation-related disclosure, while risk-related sentences account for a much smaller proportion. Specifically, the current classification produces substantially more innovation sentences than risk sentences, with a relatively large number of neutral sentences and only a small number of mixed sentences.
+### Hypotheses 2 and 3
 
-This imbalance is reasonable in the context of corporate annual reports, because firms usually emphasize the positive applications, development plans, and strategic benefits of AI, while they disclose AI-related risks less frequently. However, the small number of risk-related sentences may limit the statistical power of Hypothesis 3, which examines AI risk disclosure.
+- Independent variables (X):
+  - AI innovation disclosure, constructed from innovation-related AI sentences in annual reports
+  - AI risk disclosure, constructed from risk-related AI sentences in annual reports
 
-Neutral sentences refer to AI-related sentences that contain AI keywords but do not include clear innovation-related or risk-related keywords. These sentences are retained in the sentence-level dataset for transparency, but they are not used as the main independent variables in the regression analysis. The main AI disclosure variables focus on innovation-related and risk-related AI sentences.
+- Dependent variable (Y):
+  - Investor sentiment, proxied by turnover rate from CSMAR
 
-Mixed sentences refer to sentences that contain both innovation-related and risk-related keywords. Because the number of mixed sentences is very small, they are reported separately but not treated as a main explanatory variable.
+- Control variables:
+  - Firm-level financial and governance variables from CSMAR
 
-A key limitation of this approach is that dictionary-based classification may not fully capture the contextual meaning of each sentence. Some sentences may be classified as innovation-related or risk-related because they contain specific keywords, even if the broader context is more complex. To reduce this concern, the dictionary is designed to be transparent and reproducible, and selected sentences will be manually checked to assess whether the classification is reasonable.
+## How to Run the Data Collection Notebook
 
-Overall, the AI innovation disclosure variable is expected to be more stable due to the larger number of observations, while the AI risk disclosure variable should be interpreted more cautiously because of its smaller sample size and lower frequency in annual reports.
+The main notebook is located in:
+
+```text
+code/Data collection-1.ipynb
