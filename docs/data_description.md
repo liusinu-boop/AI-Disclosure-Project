@@ -166,18 +166,17 @@ Risk-related keywords include:
 The dictionary-based approach was selected because it is transparent, interpretable, and reproducible. The keyword lists were manually constructed based on prior AI disclosure literature and adjusted to fit Chinese annual report contexts.
 
 ---
-## Data Quality Issues
+Data Quality and Limitations
 
-The current sentence-level classification dataset is based on approximately 100 Chinese listed firms over a five-year period. This limited sample size is mainly used for the exploratory classification of AI innovation disclosure and AI risk disclosure.
+The sentence-level classification results show an imbalanced distribution across categories. Most AI-related sentences are classified as innovation-related disclosure, while risk-related sentences account for a much smaller proportion. Specifically, the current classification produces substantially more innovation sentences than risk sentences, with a relatively large number of neutral sentences and only a small number of mixed sentences.
 
-Because the innovation-risk classification process requires manual dictionary construction and sentence-level textual analysis, a smaller sample was selected to make the analysis manageable and to allow preliminary validation of the classification approach.
+This imbalance is reasonable in the context of corporate annual reports, because firms usually emphasize the positive applications, development plans, and strategic benefits of AI, while they disclose AI-related risks less frequently. However, the small number of risk-related sentences may limit the statistical power of Hypothesis 3, which examines AI risk disclosure.
 
-For Hypothesis 2 and Hypothesis 3, the empirical analysis will combine the AI disclosure measures with additional firm-level and market variables collected from the CSMAR database. Therefore, the final regression dataset may differ from the current sentence-level classification sample.
+Neutral sentences refer to AI-related sentences that contain AI keywords but do not include clear innovation-related or risk-related keywords. These sentences are retained in the sentence-level dataset for transparency, but they are not used as the main independent variables in the regression analysis. The main AI disclosure variables focus on innovation-related and risk-related AI sentences.
 
-Possible data quality issues include:
-- PDF text extraction errors
-- duplicated sentences
-- keyword matching limitations
-- potential measurement noise from dictionary-based classification
+Mixed sentences refer to sentences that contain both innovation-related and risk-related keywords. Because the number of mixed sentences is very small, they are reported separately but not treated as a main explanatory variable.
 
-These issues will be further addressed through data cleaning, duplicate removal, and manual validation of selected AI-related sentences.
+A key limitation of this approach is that dictionary-based classification may not fully capture the contextual meaning of each sentence. Some sentences may be classified as innovation-related or risk-related because they contain specific keywords, even if the broader context is more complex. To reduce this concern, the dictionary is designed to be transparent and reproducible, and selected sentences will be manually checked to assess whether the classification is reasonable.
+
+Overall, the AI innovation disclosure variable is expected to be more stable due to the larger number of observations, while the AI risk disclosure variable should be interpreted more cautiously because of its smaller sample size and lower frequency in annual reports.
+
