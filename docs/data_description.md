@@ -1,5 +1,11 @@
 # Data Description
+This study combines financial data from the CSMAR database with manually constructed AI disclosure measures extracted from corporate annual reports.
 
+For the baseline analysis (Hypothesis 1), the sample includes all Chinese A-share listed firms, excluding financial firms and ST companies, following standard practice in the literature. The dependent variable (investor sentiment) and firm-level control variables are obtained from the CSMAR database.
+
+For the AI disclosure analysis (Hypotheses 2 and 3), the independent variables are constructed using a text analysis approach. Specifically, annual reports are collected and processed using Python, and AI-related sentences are identified and classified into two categories: AI innovation disclosure and AI risk disclosure, based on a dictionary-based method.
+
+Due to the computational intensity of large-scale text processing, a subsample of firms is selected for the AI disclosure analysis. This subsample is not driven by data availability issues, but rather by practical constraints in processing and cleaning textual data. The dependent variable (investor sentiment) and control variables in this part are still obtained from the CSMAR database to ensure consistency across analyses.
 ## Data Source
 
 The dataset is based on annual reports of Chinese A-share listed firms.
